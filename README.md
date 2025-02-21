@@ -53,18 +53,6 @@ BINANCE_API_SECRET=your_api_secret
 
 ---
 
-<div align="center">
-  <h2>📌 Usage</h2>
-</div>
-<ul>
-  <li>To run the script on Windows using the batch file, simply double-click <code>run_python_tracker.bat</code>.</li>
-  <li>The script fetches updated data and updates your Google Sheet automatically.</li>
-</ul>
-
----
-
----
-
 <div>
   <h2>🤖 Automation</h2>
   <p>The script runs automatically using a Windows batch file. It ensures that your Google Sheet is updated with the latest investment data.</p>
@@ -93,6 +81,3 @@ BINANCE_API_SECRET=your_api_secret
   <li>🚨 Do NOT push <code>.env</code> and <code>credentials.json</code> to GitHub.</li>
   <li>🚨 Add them to <code>.gitignore</code> to keep them private.</li>
 </ul>
-
----
-
