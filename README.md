@@ -22,8 +22,8 @@
   <h2>📂 Project Structure</h2>
 </div>
 <pre>
-├── 📄 .env                # Stores Binance API keys (not pushed to GitHub)
-├── 📄 credentials.json    # Google Sheets API credentials (not pushed to GitHub)
+├── 📄 .env  
+├── 📄 credentials.json  
 ├── 📄 portfolio_tracker.py # Main script for fetching & updating data
 ├── 📄 run_python_tracker.bat # Windows batch file to run the script
 </pre>
