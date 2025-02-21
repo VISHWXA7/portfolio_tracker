@@ -72,7 +72,6 @@ BINANCE_API_SECRET=your_api_secret
     <li>Set action: Start a program → Select <b>run_python_tracker.bat</b></li>
   </ol>
 </div>
----
 
 <div align="center">
   <h2>🔒 Security Notes</h2>
