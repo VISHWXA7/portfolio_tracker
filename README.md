@@ -63,6 +63,29 @@ BINANCE_API_SECRET=your_api_secret
 
 ---
 
+---
+
+<div>
+  <h2>🤖 Automation</h2>
+  <p>The script runs automatically using a Windows batch file. It ensures that your Google Sheet is updated with the latest investment data.</p>
+  <h3>🔹 Windows Automation</h3>
+  <p>Create a scheduled task to run <code>run_python_tracker.bat</code> at regular intervals.</p>
+  <pre>
+  @echo off
+  cd /d C:\Users\YourUsername\investment_tracker # project-folder
+  "C:\Users\YourUser\AppData\Local\Programs\Python\Python310\python.exe" portfolio_tracker.py
+  exit
+  </pre>
+  <h3>🔹 Task Scheduler Setup</h3>
+  <ol>
+    <li>Open Windows Task Scheduler</li>
+    <li>Create a new task</li>
+    <li>Set trigger: Run every 1 Day</li>
+    <li>Set action: Start a program → Select <b>run_python_tracker.bat</b></li>
+  </ol>
+</div>
+---
+
 <div align="center">
   <h2>🔒 Security Notes</h2>
 </div>
@@ -73,7 +96,3 @@ BINANCE_API_SECRET=your_api_secret
 
 ---
 
-<div align="center">
-  <h2>📞 Contact</h2>
-</div>
-<p>Created by <strong>Vishwaa</strong>. Feel free to reach out!</p>
