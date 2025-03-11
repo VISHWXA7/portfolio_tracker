@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-5">
+
+    <h1 class="text-3xl font-bold mb-5 text-center">📈 Investment Portfolio</h1>
+
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-4xl">
+        <h2 class="text-xl font-semibold">Total Portfolio Value: <span id="totalValue" class="text-green-400">₹0.00</span></h2>
+    </div>
+
+    <!-- ETF Table -->
+    <div class="mt-6 w-full max-w-4xl">
+        <h2 class="text-2xl font-semibold mb-2">📊 ETF Holdings</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-700">
+                <thead>
+                    <tr class="bg-gray-700">
+                        <th class="border border-gray-600 px-4 py-2">Stock</th>
+                        <th class="border border-gray-600 px-4 py-2">Quantity</th>
+                        <th class="border border-gray-600 px-4 py-2">Buy Price</th>
+                        <th class="border border-gray-600 px-4 py-2">Current Price</th>
+                        <th class="border border-gray-600 px-4 py-2">Total Value</th>
+                        <th class="border border-gray-600 px-4 py-2">Profit/Loss</th>
+                    </tr>
+                </thead>
+                <tbody id="etfTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Mutual Funds Table -->
+    <div class="mt-6 w-full max-w-4xl">
+        <h2 class="text-2xl font-semibold mb-2">🏦 Mutual Fund Holdings</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse border border-gray-700">
+                <thead>
+                    <tr class="bg-gray-700">
+                        <th class="border border-gray-600 px-4 py-2">Fund</th>
+                        <th class="border border-gray-600 px-4 py-2">Quantity</th>
+                        <th class="border border-gray-600 px-4 py-2">Buy Price</th>
+                        <th class="border border-gray-600 px-4 py-2">Current NAV</th>
+                        <th class="border border-gray-600 px-4 py-2">Total Value</th>
+                        <th class="border border-gray-600 px-4 py-2">Profit/Loss</th>
+                    </tr>
+                </thead>
+                <tbody id="mfTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function loadPortfolio() {
+            fetch("portfolio.json")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("totalValue").innerText = `₹${data.TotalPortfolioValue.toFixed(2)}`;
+
+                    let etfTable = document.getElementById("etfTable");
+                    etfTable.innerHTML = "";
+                    data.ETFs.forEach(row => {
+                        let newRow = etfTable.insertRow();
+                        newRow.innerHTML = `
+                            <td class="border border-gray-600 px-4 py-2">${row.Stock}</td>
+                            <td class="border border-gray-600 px-4 py-2">${row.Quantity}</td>
+                            <td class="border border-gray-600 px-4 py-2">₹${row.Buy_Price}</td>
+                            <td class="border border-gray-600 px-4 py-2">₹${row.Current_Price}</td>
+                            <td class="border border-gray-600 px-4 py-2">₹${row.Total_Value}</td>
+                            <td class="border border-gray-600 px-4 py-2 ${row.Profit_Loss >= 0 ? 'text-green-400' : 'text-red-400'}">
+                                ₹${row.Profit_Loss}
+                            </td>`;
+                    });
+
+                    let mfTable = document.getElementById("mfTable");
+                    mfTable.innerHTML = "";
+                    data.MutualFunds.forEach(row => {
+                        let newRow = mfTable.insertRow();
+                        newRow.innerHTML = `
+                            <td class="border border-gray-600 px-4 py-2">${row.Fund}</td>
+                            <td class="border border-gray-600 px-4 py-2">${row.Quantity}</td>
+                            <td class="border border-gray-600 px-4 py-2">₹${row.Buy_Price}</td>
+                            <td class="border border-gray-600 px-4 py-2">₹${row.Current_NAV}</td>
+                            <td class="border border-gray-600 px-4 py-2">₹${row.Total_Value}</td>
+                            <td class="border border-gray-600 px-4 py-2 ${row.Profit_Loss >= 0 ? 'text-green-400' : 'text-red-400'}">
+                                ₹${row.Profit_Loss}
+                            </td>`;
+                    });
+                })
+                .catch(error => console.error("Error loading portfolio data:", error));
+        }
+
+        loadPortfolio();
+        setInterval(loadPortfolio, 60000);
+    </script>
+
+</body>
+</html>
